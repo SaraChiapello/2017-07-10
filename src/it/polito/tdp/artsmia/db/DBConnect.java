@@ -7,9 +7,10 @@ import javax.sql.DataSource;
 
 import com.mchange.v2.c3p0.DataSources;
 
+
 public class DBConnect {
 
-	private static String jdbcURL = "jdbc:mysql://localhost/artsmia?user=1996novembre";
+	private static String jdbcURL = "jdbc:mysql://localhost/artsmia?user=root&password=1996novembre";
 
 	private static DataSource ds;
 
