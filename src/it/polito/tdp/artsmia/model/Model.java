@@ -27,6 +27,7 @@ public class Model {
 		// for(ArtObject ao:this.artObjects)
 		// this.graph.addVertex(ao); //ottengo tanti vertici ma per ora ho 0 archi
 		Graphs.addAllVertices(this.graph, this.artObjects);
+		/* versione poco efficiente
 		// aggiungi archi(con il loro peso)
 		for (ArtObject aop : this.artObjects) {
 			for (ArtObject aoa : this.artObjects) {
@@ -47,7 +48,17 @@ public class Model {
 					}
 				}
 			}
+		}*/
+		for(ArtObject ao:this.artObjects) {
+			List<ArtObjectAndCount> connessi=DAO.listArtObjectAndCount(ao);
+					for(ArtObjectAndCount c:connessi) {
+						ArtObject dest=new ArtObject(c.getArtObjectId(), null, null, null, 0, null, null, null, null, null, 0, null, null, null, null, null);//oggetto debole
+						Graphs.addEdge(this.graph, ao, dest,c.getCount());
+						System.out.format("(%d, %d) peso %d\n", ao.getId(),dest.getId(),c.getCount());
+
+					}
 		}
+
 	}
 
 	private int exhibitionComuni(ArtObject aop, ArtObject aoa) {
